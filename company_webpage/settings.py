@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "webpage_app",
 ]
 
+AUTH_USER_MODEL = "webpage_app.Purchaser"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
