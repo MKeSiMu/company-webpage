@@ -98,7 +98,9 @@ class Manufacturer(models.Model):
         blank=True
     )
     remark = models.CharField(
-        max_length=500
+        max_length=500,
+        null=True,
+        blank=True
     )
 
     class Meta:
