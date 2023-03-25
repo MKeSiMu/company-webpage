@@ -251,6 +251,11 @@ svg {
   vertical-align: middle;
 }
 
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 100%;
+}
+
 label {
   display: inline-block;
 }
