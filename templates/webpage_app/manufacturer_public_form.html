@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="container container-header">
+    <h1 class="text-center">Become Our Supplier</h1>
+    <p class="text-lg">
+      If you want to become our supplier for operative purchasing, please fill in
+      this form to get in touch with the right person at purchasing departament!
+    </p>
+    <p class="text-sm">
+      <strong>Disclaimer:</strong>
+      <br>
+      Filling this form does not create you as our supplier in our system but allows
+    you to get in touch with purchasing departament and be contacted in case of a potential
+    collaboration opportunity.
+    </p>
+    <form action="" method="post" autocomplete="off" novalidate>
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <input type="submit" value="Submit" class="btn bg-gradient-success">
+    </form>
+  </div>
+{% endblock %}

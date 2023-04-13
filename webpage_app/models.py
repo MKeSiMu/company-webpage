@@ -68,7 +68,11 @@ class Manufacturer(models.Model):
     )
     contact_person = models.CharField(max_length=255)
     contact_phone = models.CharField(max_length=255)
-    website = models.URLField(max_length=255, null=True)
+    website = models.URLField(
+        max_length=255,
+        null=True,
+        blank=True
+    )
     produce_bearing_type = models.ManyToManyField(
         BearingType,
         related_name="manufacturers"
