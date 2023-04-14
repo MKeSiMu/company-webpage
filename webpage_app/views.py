@@ -59,9 +59,6 @@ class ManufacturerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Manufacturer
     form_class = ManufacturerForm
     success_url = reverse_lazy("webpage_app:manufacturer-list")
-    queryset = Manufacturer.objects.select_related(
-        "responsible_purchaser"
-    ).prefetch_related("produce_bearing_type__bearing_category")
 
 
 class ManufacturerPublicCreateView(generic.CreateView):
@@ -69,16 +66,12 @@ class ManufacturerPublicCreateView(generic.CreateView):
     form_class = ManufacturerPublicForm
     success_url = reverse_lazy("webpage_app:index")
     template_name = "webpage_app/manufacturer_public_form.html"
-    queryset = Manufacturer.objects.select_related(
-        "responsible_purchaser"
-    ).prefetch_related("produce_bearing_type__bearing_category")
 
 
 class ManufacturerUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Manufacturer
     form_class = ManufacturerForm
     success_url = reverse_lazy("webpage_app:manufacturer-list")
-    queryset = Manufacturer.objects.prefetch_related("produce_bearing_type", "b")
 
 
 class ManufacturerDeleteView(LoginRequiredMixin, generic.DeleteView):

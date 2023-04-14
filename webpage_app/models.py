@@ -34,7 +34,7 @@ class BearingType(models.Model):
         ordering = ["bearing_category"]
 
     def __str__(self):
-        return f"{self.name} ({self.bearing_category})"
+        return f"{self.name}"
 
 
 class Manufacturer(models.Model):
