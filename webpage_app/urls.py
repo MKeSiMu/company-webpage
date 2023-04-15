@@ -7,7 +7,9 @@ from webpage_app.views import (
     ManufacturerPublicCreateView,
     ManufacturerUpdateView,
     ManufacturerDeleteView,
-    ManufacturerDetailView
+    ManufacturerDetailView,
+    BearingTypeListView,
+    BearingTypeDetailView, BearingTypeCreateView, BearingTypeUpdateView, BearingTypeDeleteView
 )
 
 urlpatterns = [
@@ -28,7 +30,7 @@ urlpatterns = [
         name="manufacturer-create",
     ),
     path(
-        "manufacturers/manufacturer-form/",
+        "manufacturer-form/",
         ManufacturerPublicCreateView.as_view(),
         name="manufacturer-public-create",
     ),
@@ -41,7 +43,32 @@ urlpatterns = [
         "manufacturers/<int:pk>/delete/",
         ManufacturerDeleteView.as_view(),
         name="manufacturer-delete",
-    )
+    ),
+    path(
+        "bearing-types/",
+        BearingTypeListView.as_view(),
+        name="bearing-type-list",
+    ),
+    path(
+        "bearing-types/<int:pk>/",
+        BearingTypeDetailView.as_view(),
+        name="bearing-type-detail",
+    ),
+    path(
+        "bearing-types/create/",
+        BearingTypeCreateView.as_view(),
+        name="bearing-type-create",
+    ),
+    path(
+        "bearing-types/<int:pk>/update/",
+        BearingTypeUpdateView.as_view(),
+        name="bearing-type-update",
+    ),
+    path(
+        "bearing-types/<int:pk>/delete/",
+        BearingTypeDeleteView.as_view(),
+        name="bearing-type-delete",
+    ),
     ]
 
 app_name = "webpage_app"

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="container container-header">
+    <h1>{{ object|yesno:"Update,Create" }} bearing type</h1>
+    <form action="" method="post" novalidate>
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <input type="submit" value="Submit" class="btn bg-gradient-success">
+    </form>
+  </div>
+{% endblock %}

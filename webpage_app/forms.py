@@ -2,7 +2,7 @@ from captcha.fields import CaptchaField
 from django import forms
 from django.core.validators import RegexValidator
 
-from webpage_app.models import Manufacturer, BearingType
+from webpage_app.models import Manufacturer, BearingType, BearingCategory
 
 
 class ManufacturerForm(forms.ModelForm):
@@ -61,6 +61,18 @@ class ManufacturerNameSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(attrs={
             "placeholder": "Enter manufacturer name for search...",
+            "style": "width: 400px"
+        })
+    )
+
+
+class BearingTypeNameSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={
+            "placeholder": "Enter bearing type name for search...",
             "style": "width: 400px"
         })
     )

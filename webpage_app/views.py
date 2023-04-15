@@ -2,8 +2,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic.list import MultipleObjectMixin
 
-from webpage_app.forms import ManufacturerNameSearchForm, ManufacturerForm, ManufacturerPublicForm
+from webpage_app.forms import (
+    ManufacturerNameSearchForm,
+    ManufacturerForm,
+    ManufacturerPublicForm,
+    BearingTypeNameSearchForm, BearingTypeForm
+)
+
 from webpage_app.models import Purchaser, Manufacturer, BearingType
 
 
@@ -36,6 +43,7 @@ class ManufacturerListView(LoginRequiredMixin, generic.ListView):
 
         context["search_name_form"] = \
             ManufacturerNameSearchForm(initial={"name": name})
+
         return context
 
     def get_queryset(self):
@@ -77,3 +85,58 @@ class ManufacturerUpdateView(LoginRequiredMixin, generic.UpdateView):
 class ManufacturerDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Manufacturer
     success_url = reverse_lazy("webpage_app:manufacturer-list")
+
+
+class BearingTypeListView(LoginRequiredMixin, generic.ListView):
+    model = BearingType
+    context_object_name = "bearing_type_list"
+    template_name = "webpage_app/bearing_type_list.html"
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(BearingTypeListView, self).get_context_data(**kwargs)
+
+        name = self.request.GET.get("name", "")
+
+        context["search_name_form"] = \
+            ManufacturerNameSearchForm(initial={"name": name})
+
+        return context
+
+    def get_queryset(self):
+        queryset = BearingType.objects.select_related("bearing_category")
+        form = BearingTypeNameSearchForm(self.request.GET)
+
+        if form.is_valid():
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
+
+
+class BearingTypeDetailView(LoginRequiredMixin, generic.DetailView):
+    model = BearingType
+    context_object_name = "bearing_type"
+    template_name = "webpage_app/bearing_type_detail.html"
+
+
+class BearingTypeCreateView(LoginRequiredMixin, generic.CreateView):
+    model = BearingType
+    context_object_name = "bearing_type_form"
+    template_name = "webpage_app/bearing_type_form.html"
+    fields = "__all__"
+    success_url = reverse_lazy("webpage_app:bearing-type-list")
+
+
+class BearingTypeUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = BearingType
+    context_object_name = "bearing_type_form"
+    template_name = "webpage_app/bearing_type_form.html"
+    fields = "__all__"
+    success_url = reverse_lazy("webpage_app:bearing-type-list")
+
+
+class BearingTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = BearingType
+    context_object_name = "bearing_type_confirm_delete"
+    template_name = "webpage_app/bearing_type_confirm_delete.html"
+    success_url = reverse_lazy("webpage_app:bearing-type-list")
