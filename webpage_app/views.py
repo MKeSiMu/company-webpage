@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -8,7 +9,7 @@ from webpage_app.forms import (
     ManufacturerNameSearchForm,
     ManufacturerForm,
     ManufacturerPublicForm,
-    BearingTypeNameSearchForm, BearingTypeForm
+    BearingTypeNameSearchForm,
 )
 
 from webpage_app.models import Purchaser, Manufacturer, BearingType
@@ -113,10 +114,16 @@ class BearingTypeListView(LoginRequiredMixin, generic.ListView):
             )
 
 
-class BearingTypeDetailView(LoginRequiredMixin, generic.DetailView):
+class BearingTypeDetailView(LoginRequiredMixin, generic.DetailView, MultipleObjectMixin):
     model = BearingType
     context_object_name = "bearing_type"
     template_name = "webpage_app/bearing_type_detail.html"
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        object_list = Manufacturer.objects.filter(produce_bearing_type=self.get_object())
+        context = super(BearingTypeDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        return context
 
 
 class BearingTypeCreateView(LoginRequiredMixin, generic.CreateView):

@@ -16,11 +16,11 @@
     <h3>Manufacturers producing this type</h3>
     {% if bearing_type.manufacturers.all %}
       <ul>
-        {% for manufacturer in bearing_type.manufacturers.all %}
+        {% for manufacturer in page_obj %}
 
           <li>
             <a href="{% url 'webpage_app:manufacturer-detail' pk=manufacturer.id %}">
-              {{ manufacturer.name }} (Status: {{ manufacturer.status }}, Price level: {{ manufacturer.price_level }})
+              {{ manufacturer.name }} (Status: {{ manufacturer.get_status_display }}, Price level: {{ manufacturer.get_price_level_display }})
             </a>
           </li>
 
