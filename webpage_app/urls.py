@@ -9,7 +9,15 @@ from webpage_app.views import (
     ManufacturerDeleteView,
     ManufacturerDetailView,
     BearingTypeListView,
-    BearingTypeDetailView, BearingTypeCreateView, BearingTypeUpdateView, BearingTypeDeleteView
+    BearingTypeDetailView,
+    BearingTypeCreateView,
+    BearingTypeUpdateView,
+    BearingTypeDeleteView,
+    BearingCategoryListView,
+    BearingCategoryDetailView,
+    BearingCategoryCreateView,
+    BearingCategoryUpdateView,
+    BearingCategoryDeleteView
 )
 
 urlpatterns = [
@@ -68,6 +76,31 @@ urlpatterns = [
         "bearing-types/<int:pk>/delete/",
         BearingTypeDeleteView.as_view(),
         name="bearing-type-delete",
+    ),
+    path(
+        "bearing-categories/",
+        BearingCategoryListView.as_view(),
+        name="bearing-category-list",
+    ),
+    path(
+        "bearing-categories/<int:pk>/",
+        BearingCategoryDetailView.as_view(),
+        name="bearing-category-detail",
+    ),
+    path(
+        "bearing-categories/create/",
+        BearingCategoryCreateView.as_view(),
+        name="bearing-category-create",
+    ),
+    path(
+        "bearing-categories/<int:pk>/update/",
+        BearingCategoryUpdateView.as_view(),
+        name="bearing-category-update",
+    ),
+    path(
+        "bearing-categories/<int:pk>/delete/",
+        BearingCategoryDeleteView.as_view(),
+        name="bearing-category-delete",
     ),
     ]
 

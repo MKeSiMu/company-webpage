@@ -12,7 +12,7 @@ from webpage_app.forms import (
     BearingTypeNameSearchForm,
 )
 
-from webpage_app.models import Purchaser, Manufacturer, BearingType
+from webpage_app.models import Purchaser, Manufacturer, BearingType, BearingCategory
 
 
 def index(request):
@@ -147,3 +147,45 @@ class BearingTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     context_object_name = "bearing_type_confirm_delete"
     template_name = "webpage_app/bearing_type_confirm_delete.html"
     success_url = reverse_lazy("webpage_app:bearing-type-list")
+
+
+class BearingCategoryListView(LoginRequiredMixin, generic.ListView):
+    model = BearingCategory
+    context_object_name = "bearing_category_list"
+    template_name = "webpage_app/bearing_category_list.html"
+    paginate_by = 5
+
+
+class BearingCategoryDetailView(LoginRequiredMixin, generic.DetailView, MultipleObjectMixin):
+    model = BearingCategory
+    context_object_name = "bearing_category"
+    template_name = "webpage_app/bearing_category_detail.html"
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        object_list = BearingType.objects.filter(bearing_category=self.get_object())
+        context = super(BearingCategoryDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        return context
+
+
+class BearingCategoryCreateView(LoginRequiredMixin, generic.CreateView):
+    model = BearingCategory
+    context_object_name = "bearing_category_form"
+    template_name = "webpage_app/bearing_category_form.html"
+    fields = "__all__"
+    success_url = reverse_lazy("webpage_app:bearing-category-list")
+
+
+class BearingCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = BearingCategory
+    context_object_name = "bearing_category_form"
+    template_name = "webpage_app/bearing_category_form.html"
+    fields = "__all__"
+    success_url = reverse_lazy("webpage_app:bearing-category-list")
+
+
+class BearingCategoryDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = BearingCategory
+    context_object_name = "bearing_category_confirm_delete"
+    template_name = "webpage_app/bearing_category_confirm_delete.html"
+    success_url = reverse_lazy("webpage_app:bearing-category-list")

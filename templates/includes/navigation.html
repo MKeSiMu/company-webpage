@@ -44,11 +44,19 @@
               </li>
 
               {% if request.user.is_authenticated %}
-                <li class="page-item ms-lg-9">
-                  <a href="javascript:;" class="page-link avatar-size">
-                   {{ request.user.first_name|slice:"1" }}{{ request.user.last_name|slice:"1" }}
-                  </a>
-                </li>
+                {% if request.user.first_name and request.user.last_name %}
+                  <li class="page-item ms-lg-9">
+                    <a href="javascript:;" class="page-link avatar-size">
+                     {{ request.user.first_name|slice:"1" }}{{ request.user.last_name|slice:"1" }}
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item ms-lg-9">
+                    <a href="javascript:;" class="page-link avatar-size">
+                     N/A
+                    </a>
+                  </li>
+                {% endif %}
                 <li class="nav-item ms-lg-auto">
                   <a class="nav-link nav-link-icon me-2"
                     href="{% url 'logout' %}">
