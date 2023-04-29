@@ -17,7 +17,8 @@ from webpage_app.views import (
     BearingCategoryDetailView,
     BearingCategoryCreateView,
     BearingCategoryUpdateView,
-    BearingCategoryDeleteView
+    BearingCategoryDeleteView, PurchaserListView, PurchaserDetailView, PurchaserCreateView, PurchaserUpdateView,
+    PurchaserDeleteView
 )
 
 urlpatterns = [
@@ -101,6 +102,31 @@ urlpatterns = [
         "bearing-categories/<int:pk>/delete/",
         BearingCategoryDeleteView.as_view(),
         name="bearing-category-delete",
+    ),
+    path(
+        "purchasers/",
+        PurchaserListView.as_view(),
+        name="purchaser-list",
+    ),
+    path(
+        "purchasers/<int:pk>/",
+        PurchaserDetailView.as_view(),
+        name="purchaser-detail",
+    ),
+    path(
+        "purchasers/create/",
+        PurchaserCreateView.as_view(),
+        name="purchaser-create",
+    ),
+    path(
+        "purchasers/<int:pk>/update/",
+        PurchaserUpdateView.as_view(),
+        name="purchaser-update",
+    ),
+    path(
+        "purchasers/<int:pk>/delete/",
+        PurchaserDeleteView.as_view(),
+        name="purchaser-delete",
     ),
     ]
 

@@ -3,6 +3,7 @@
 
 {% block content %}
   <div class="container container-header">
+  {% if request.user == manufacturer.responsible_purchaser %}
     <h1>{{ object|yesno:"Update,Create" }} manufacturer</h1>
     <form action="" method="post" novalidate>
       {% csrf_token %}
@@ -10,5 +11,9 @@
 
       <input type="submit" value="Submit" class="btn bg-gradient-success">
     </form>
+  {% else %}
+    <h1>Can't update information!</h1>
+    <p>Sorry, you cannot update the information if you are not responsible for manufacturer.</p>
+  {% endif %}
   </div>
 {% endblock %}

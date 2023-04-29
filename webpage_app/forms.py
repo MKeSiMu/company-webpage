@@ -1,8 +1,9 @@
 from captcha.fields import CaptchaField
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import RegexValidator
 
-from webpage_app.models import Manufacturer, BearingType, BearingCategory
+from webpage_app.models import Manufacturer, BearingType, BearingCategory, Purchaser
 
 
 class ManufacturerForm(forms.ModelForm):
@@ -76,3 +77,25 @@ class BearingTypeNameSearchForm(forms.Form):
             "style": "width: 400px"
         })
     )
+
+
+class PurchaserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = Purchaser
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "is_staff",
+            "is_superuser"
+        )
+
+
+class PurchaserStatusUpdateForm(forms.ModelForm):
+    captcha = CaptchaField()
+
+    class Meta:
+        model = Purchaser
+        fields = [
+            "is_staff",
+            "is_superuser"
+        ]

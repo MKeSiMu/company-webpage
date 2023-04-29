@@ -28,7 +28,7 @@
         {% for manufacturer in manufacturer_list %}
           <tr>
             <td>
-                {{ manufacturer.id }}
+              {{ manufacturer.id }}
             </td>
             <td>
               <a href="{% url 'webpage_app:manufacturer-detail' pk=manufacturer.id %}">
@@ -36,10 +36,10 @@
               </a>
             </td>
             <td>
-                {{ manufacturer.responsible_purchaser }}
+              {{ manufacturer.responsible_purchaser }}
             </td>
             <td>
-                {{ manufacturer.get_status_display }}
+              {{ manufacturer.get_status_display }}
             </td>
             <td>
               <a class="btn btn-info w-auto me-1 mb-0" href="{% url 'webpage_app:manufacturer-update' pk=manufacturer.id %}">

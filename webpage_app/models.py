@@ -81,7 +81,8 @@ class Manufacturer(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         null=True,
-        blank=True
+        blank=True,
+        related_name="manufacturers"
     )
     price_level = models.CharField(
         max_length=1,

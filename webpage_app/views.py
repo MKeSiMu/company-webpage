@@ -9,7 +9,7 @@ from webpage_app.forms import (
     ManufacturerNameSearchForm,
     ManufacturerForm,
     ManufacturerPublicForm,
-    BearingTypeNameSearchForm,
+    BearingTypeNameSearchForm, PurchaserCreationForm, PurchaserStatusUpdateForm,
 )
 
 from webpage_app.models import Purchaser, Manufacturer, BearingType, BearingCategory
@@ -189,3 +189,41 @@ class BearingCategoryDeleteView(LoginRequiredMixin, generic.DeleteView):
     context_object_name = "bearing_category_confirm_delete"
     template_name = "webpage_app/bearing_category_confirm_delete.html"
     success_url = reverse_lazy("webpage_app:bearing-category-list")
+
+
+class PurchaserListView(LoginRequiredMixin, generic.ListView):
+    model = Purchaser
+    queryset = Purchaser.objects.prefetch_related("manufacturers__responsible_purchaser")
+    template_name = "webpage_app/purchaser_list.html"
+    paginate_by = 5
+
+
+class PurchaserDetailView(LoginRequiredMixin, generic.DetailView, MultipleObjectMixin):
+    model = Purchaser
+    template_name = "webpage_app/purchaser_detail.html"
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        object_list = Manufacturer.objects.filter(responsible_purchaser=self.get_object())
+        context = super(PurchaserDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        return context
+
+
+class PurchaserCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Purchaser
+    template_name = "webpage_app/purchaser_form.html"
+    form_class = PurchaserCreationForm
+    success_url = reverse_lazy("webpage_app:purchaser-list")
+
+
+class PurchaserUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Purchaser
+    template_name = "webpage_app/purchaser_form.html"
+    form_class = PurchaserStatusUpdateForm
+    success_url = reverse_lazy("webpage_app:purchaser-list")
+
+
+class PurchaserDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Purchaser
+    template_name = "webpage_app/purchaser_confirm_delete.html"
+    success_url = reverse_lazy("webpage_app:purchaser-list")
