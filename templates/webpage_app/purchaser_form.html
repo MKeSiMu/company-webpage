@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="container container-header">
+    {% if request.user.is_superuser %}
+      <h1>{{ object|yesno:"Update,Create" }} purchaser</h1>
+      <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <input type="submit" value="Submit" class="btn bg-gradient-success">
+      </form>
+    {% else %}
+      <h1>No permission!</h1>
+        <p>Sorry, you don't have permission to {{ object|yesno:"update,create" }} purchaser.</p>
+    {% endif %}
+  </div>
+{% endblock %}
