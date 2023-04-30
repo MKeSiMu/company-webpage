@@ -1,7 +1,5 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -86,9 +84,9 @@ class ManufacturerCreateView(LoginRequiredMixin, generic.CreateView):
 class ManufacturerPublicCreateView(SuccessMessageMixin, generic.CreateView):
     model = Manufacturer
     form_class = ManufacturerPublicForm
-    # success_url = reverse_lazy("webpage_app:index")
     success_url = "/manufacturer-form/"
-    success_message = "Form submission successful. Thank you! We will contact you ASAP."
+    success_message = \
+        "Form submission successful. Thank you! We will contact you ASAP."
     template_name = "webpage_app/manufacturer_public_form.html"
 
 
@@ -129,15 +127,23 @@ class BearingTypeListView(LoginRequiredMixin, generic.ListView):
             )
 
 
-class BearingTypeDetailView(LoginRequiredMixin, generic.DetailView, MultipleObjectMixin):
+class BearingTypeDetailView(
+    LoginRequiredMixin,
+    generic.DetailView,
+    MultipleObjectMixin
+):
     model = BearingType
     context_object_name = "bearing_type"
     template_name = "webpage_app/bearing_type_detail.html"
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
-        object_list = Manufacturer.objects.filter(produce_bearing_type=self.get_object())
-        context = super(BearingTypeDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        object_list = Manufacturer.objects.filter(
+            produce_bearing_type=self.get_object()
+        )
+        context = super(
+            BearingTypeDetailView, self
+        ).get_context_data(object_list=object_list, **kwargs)
         return context
 
 
@@ -171,15 +177,23 @@ class BearingCategoryListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
 
-class BearingCategoryDetailView(LoginRequiredMixin, generic.DetailView, MultipleObjectMixin):
+class BearingCategoryDetailView(
+    LoginRequiredMixin,
+    generic.DetailView,
+    MultipleObjectMixin
+):
     model = BearingCategory
     context_object_name = "bearing_category"
     template_name = "webpage_app/bearing_category_detail.html"
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
-        object_list = BearingType.objects.filter(bearing_category=self.get_object())
-        context = super(BearingCategoryDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        object_list = BearingType.objects.filter(
+            bearing_category=self.get_object()
+        )
+        context = super(
+            BearingCategoryDetailView, self
+        ).get_context_data(object_list=object_list, **kwargs)
         return context
 
 
@@ -208,19 +222,29 @@ class BearingCategoryDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class PurchaserListView(LoginRequiredMixin, generic.ListView):
     model = Purchaser
-    queryset = Purchaser.objects.prefetch_related("manufacturers__responsible_purchaser")
+    queryset = Purchaser.objects.prefetch_related(
+        "manufacturers__responsible_purchaser"
+    )
     template_name = "webpage_app/purchaser_list.html"
     paginate_by = 5
 
 
-class PurchaserDetailView(LoginRequiredMixin, generic.DetailView, MultipleObjectMixin):
+class PurchaserDetailView(
+    LoginRequiredMixin,
+    generic.DetailView,
+    MultipleObjectMixin
+):
     model = Purchaser
     template_name = "webpage_app/purchaser_detail.html"
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
-        object_list = Manufacturer.objects.filter(responsible_purchaser=self.get_object())
-        context = super(PurchaserDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        object_list = Manufacturer.objects.filter(
+            responsible_purchaser=self.get_object()
+        )
+        context = super(
+            PurchaserDetailView, self
+        ).get_context_data(object_list=object_list, **kwargs)
         return context
 
 

@@ -4,11 +4,17 @@
   <div class="container container-header">
     <h1>
       {{ bearing_category.name }}
-      <a href="{% url 'webpage_app:bearing-category-delete' pk=bearing_category.id %}" class="btn btn-danger w-auto me-1 mb-0" >
+      <a
+          href="{% url 'webpage_app:bearing-category-delete' pk=bearing_category.id %}"
+          class="btn btn-danger w-auto me-1 mb-0"
+      >
         Delete
       </a>
 
-      <a href="{% url 'webpage_app:bearing-category-update' pk=bearing_category.id %}" class="btn btn-info w-auto me-1 mb-0">
+      <a
+          href="{% url 'webpage_app:bearing-category-update' pk=bearing_category.id %}"
+          class="btn btn-info w-auto me-1 mb-0"
+      >
         Update
       </a>
     </h1>

@@ -12,7 +12,11 @@
       <ul>
         {% for bearing_category in bearing_category_list %}
           <li>
-            <a href="{% url 'webpage_app:bearing-category-detail' pk=bearing_category.id %} ">{{ bearing_category.name }}</a>
+            <a
+                href="{% url 'webpage_app:bearing-category-detail' pk=bearing_category.id %} "
+            >
+              {{ bearing_category.name }}
+            </a>
           </li>
         {% endfor %}
       </ul>

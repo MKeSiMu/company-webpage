@@ -42,7 +42,10 @@
               {{ manufacturer.get_status_display }}
             </td>
             <td>
-              <a class="btn btn-info w-auto me-1 mb-0" href="{% url 'webpage_app:manufacturer-update' pk=manufacturer.id %}">
+              <a
+                  class="btn btn-info w-auto me-1 mb-0"
+                  href="{% url 'webpage_app:manufacturer-update' pk=manufacturer.id %}"
+              >
                 Update
               </a>
             </td>

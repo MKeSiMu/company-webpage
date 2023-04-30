@@ -17,7 +17,11 @@ from webpage_app.views import (
     BearingCategoryDetailView,
     BearingCategoryCreateView,
     BearingCategoryUpdateView,
-    BearingCategoryDeleteView, PurchaserListView, PurchaserDetailView, PurchaserCreateView, PurchaserUpdateView,
+    BearingCategoryDeleteView,
+    PurchaserListView,
+    PurchaserDetailView,
+    PurchaserCreateView,
+    PurchaserUpdateView,
     PurchaserDeleteView
 )
 

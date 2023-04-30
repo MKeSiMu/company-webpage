@@ -38,7 +38,10 @@
                 {{ bearing_type.bearing_category }}
             </td>
             <td>
-              <a class="btn btn-info w-auto me-1 mb-0" href="{% url 'webpage_app:bearing-type-update' pk=bearing_type.id %}">
+              <a
+                  class="btn btn-info w-auto me-1 mb-0"
+                  href="{% url 'webpage_app:bearing-type-update' pk=bearing_type.id %}"
+              >
                 Update
               </a>
             </td>

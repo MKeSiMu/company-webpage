@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import RegexValidator
 
-from webpage_app.models import Manufacturer, BearingType, BearingCategory, Purchaser
+from webpage_app.models import Manufacturer, BearingType, Purchaser
 
 
 class ManufacturerForm(forms.ModelForm):

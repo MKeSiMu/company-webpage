@@ -26,7 +26,8 @@
 
           <li>
             <a href="{% url 'webpage_app:manufacturer-detail' pk=manufacturer.id %}">
-              {{ manufacturer.name }} (Status: {{ manufacturer.get_status_display }}, Price level: {{ manufacturer.get_price_level_display }})
+              {{ manufacturer.name }} (Status: {{ manufacturer.get_status_display }},
+              Price level: {{ manufacturer.get_price_level_display }})
             </a>
           </li>
 
