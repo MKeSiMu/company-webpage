@@ -9,7 +9,7 @@
           <a class="navbar-brand font-weight-bolder ms-sm-3"
             href="/" rel="tooltip"
             title="Hreyfin Bearings | Price * Consistency * Quality" data-placement="bottom">
-            <img class="logo" src="{% static "img/hflogo.png" %}" alt="Hreyfin logo png">
+            <img class="logo" src="{% static "img/bblogo.png" %}" alt="Hreyfin logo png">
           </a>
           <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
             data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
@@ -22,41 +22,35 @@
           </button>
           <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
             <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100">
-              <li class="nav-item dropdown dropdown-hover mx-2">
-                <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
-                  href="/#about-us">
-                  About Us
-                </a>
-              </li>
-
-              <li class="nav-item dropdown dropdown-hover mx-2">
-                <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
-                  href="{% url 'webpage_app:manufacturer-public-create' %}">
-                  Become Supplier
-                </a>
-              </li>
-
-              <li class="nav-item dropdown dropdown-hover mx-2">
-                <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
-                  href="/#contact-us">
-                  Contact Us
-                </a>
-              </li>
-
               {% if request.user.is_authenticated %}
-                {% if request.user.first_name and request.user.last_name %}
-                  <li class="page-item ms-lg-9">
-                    <a href="javascript:;" class="page-link avatar-size">
-                     {{ request.user.first_name|slice:"1" }}{{ request.user.last_name|slice:"1" }}
-                    </a>
-                  </li>
-                {% else %}
-                  <li class="page-item ms-lg-9">
-                    <a href="javascript:;" class="page-link avatar-size">
-                     N/A
-                    </a>
-                  </li>
-                {% endif %}
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
+                    href="{% url 'webpage_app:purchaser-list' %}">
+                    Purchasers
+                  </a>
+                </li>
+
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
+                    href="{% url 'webpage_app:manufacturer-list' %}">
+                    Manufacturers
+                  </a>
+                </li>
+
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
+                    href="{% url 'webpage_app:bearing-type-list' %}">
+                    Bearing Type
+                  </a>
+                </li>
+
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
+                    href="{% url 'webpage_app:bearing-category-list' %}">
+                    Bearing Category
+                  </a>
+                </li>
+
                 <li class="nav-item ms-lg-auto">
                   <a class="nav-link nav-link-icon me-2"
                     href="{% url 'logout' %}">
@@ -65,7 +59,38 @@
                       data-bs-placement="bottom" title="Logout">Logout</p>
                   </a>
                 </li>
+                <li class="page-item my-auto ms-3 ms-lg-0">
+                  <a href="{% url 'webpage_app:purchaser-detail' pk=request.user.id %}"
+                    class="btn bg-gradient-success text-white page-link avatar-size">
+                    {% if request.user.first_name and request.user.last_name %}
+                      {{ request.user.first_name|slice:"1" }}{{ request.user.last_name|slice:"1" }}
+                    {% else %}
+                      {{ request.user.username|slice:"1" }}{{ request.user.username|slice:"-1:" }}
+                    {% endif %}
+                  </a>
+                </li>
               {% else %}
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
+                    href="/#about-us">
+                    About Us
+                  </a>
+                </li>
+
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
+                    href="{% url 'webpage_app:manufacturer-public-create' %}">
+                    Become Supplier
+                  </a>
+                </li>
+
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
+                    href="/#contact-us">
+                    Contact Us
+                  </a>
+                </li>
+
                 <li class="nav-item ms-lg-auto">
                   <a class="nav-link nav-link-icon me-2"
                     href="{% url 'login' %}">
@@ -75,6 +100,7 @@
                   </a>
                 </li>
               {% endif %}
+
             </ul>
           </div>
         </div>

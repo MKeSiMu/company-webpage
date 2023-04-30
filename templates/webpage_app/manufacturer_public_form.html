@@ -1,25 +1,40 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
-{% block content %}
+{% block content_for_anonymous_user %}
   <div class="container container-header">
     <h1 class="text-center">Become Our Supplier</h1>
-    <p class="text-lg">
-      If you want to become our supplier for operative purchasing, please fill in
-      this form to get in touch with the right person at purchasing departament!
-    </p>
-    <p class="text-sm">
-      <strong>Disclaimer:</strong>
-      <br>
-      Filling this form does not create you as our supplier in our system but allows
-    you to get in touch with purchasing departament and be contacted in case of a potential
-    collaboration opportunity.
-    </p>
-    <form action="" method="post" autocomplete="off" novalidate>
-      {% csrf_token %}
-      {{ form|crispy }}
 
-      <input type="submit" value="Submit" class="btn bg-gradient-success">
-    </form>
+    {% if messages %}
+      <ul class="messages" style="list-style-type: none">
+        {% for message in messages %}
+          <li
+              {% if message.tags %}
+                class=" {{ message.tags }} text-lg text-center text-primary"
+              {% endif %}
+          >
+            {{ message }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-lg">
+        If you want to become our supplier for operative purchasing, please fill in
+        this form to get in touch with the right person at purchasing departament!
+      </p>
+      <p class="text-sm">
+        <strong>Disclaimer:</strong>
+        <br>
+        Filling this form does not create you as our supplier in our system but allows
+      you to get in touch with purchasing departament and be contacted in case of a potential
+      collaboration opportunity.
+      </p>
+      <form action="" method="post" autocomplete="off" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <input type="submit" value="Submit" class="btn bg-gradient-success">
+      </form>
+  {% endif %}
   </div>
 {% endblock %}

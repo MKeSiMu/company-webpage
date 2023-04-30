@@ -1,5 +1,7 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.paginator import Paginator
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -9,15 +11,24 @@ from webpage_app.forms import (
     ManufacturerNameSearchForm,
     ManufacturerForm,
     ManufacturerPublicForm,
-    BearingTypeNameSearchForm, PurchaserCreationForm, PurchaserStatusUpdateForm,
+    BearingTypeNameSearchForm,
+    PurchaserCreationForm,
+    PurchaserUpdateForm,
 )
 
-from webpage_app.models import Purchaser, Manufacturer, BearingType, BearingCategory
+from webpage_app.models import (
+    Purchaser,
+    Manufacturer,
+    BearingType,
+    BearingCategory
+)
 
 
 def index(request):
     num_purchasers = Purchaser.objects.count()
     num_manufacturers = Manufacturer.objects.count()
+    num_bearing_type = BearingType.objects.count()
+    num_bearing_category = BearingCategory.objects.count()
 
     num_visit = request.session.get("num_visit", 0)
     request.session["num_visit"] = num_visit + 1
@@ -25,6 +36,8 @@ def index(request):
     context = {
         "num_purchasers": num_purchasers,
         "num_manufacturers": num_manufacturers,
+        "num_bearing_type": num_bearing_type,
+        "num_bearing_category": num_bearing_category,
         "num_visit": num_visit + 1,
     }
 
@@ -70,10 +83,12 @@ class ManufacturerCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("webpage_app:manufacturer-list")
 
 
-class ManufacturerPublicCreateView(generic.CreateView):
+class ManufacturerPublicCreateView(SuccessMessageMixin, generic.CreateView):
     model = Manufacturer
     form_class = ManufacturerPublicForm
-    success_url = reverse_lazy("webpage_app:index")
+    # success_url = reverse_lazy("webpage_app:index")
+    success_url = "/manufacturer-form/"
+    success_message = "Form submission successful. Thank you! We will contact you ASAP."
     template_name = "webpage_app/manufacturer_public_form.html"
 
 
@@ -153,14 +168,14 @@ class BearingCategoryListView(LoginRequiredMixin, generic.ListView):
     model = BearingCategory
     context_object_name = "bearing_category_list"
     template_name = "webpage_app/bearing_category_list.html"
-    paginate_by = 5
+    paginate_by = 10
 
 
 class BearingCategoryDetailView(LoginRequiredMixin, generic.DetailView, MultipleObjectMixin):
     model = BearingCategory
     context_object_name = "bearing_category"
     template_name = "webpage_app/bearing_category_detail.html"
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         object_list = BearingType.objects.filter(bearing_category=self.get_object())
@@ -219,7 +234,7 @@ class PurchaserCreateView(LoginRequiredMixin, generic.CreateView):
 class PurchaserUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Purchaser
     template_name = "webpage_app/purchaser_form.html"
-    form_class = PurchaserStatusUpdateForm
+    form_class = PurchaserUpdateForm
     success_url = reverse_lazy("webpage_app:purchaser-list")
 
 

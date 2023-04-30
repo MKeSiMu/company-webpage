@@ -90,12 +90,15 @@ class PurchaserCreationForm(UserCreationForm):
         )
 
 
-class PurchaserStatusUpdateForm(forms.ModelForm):
+class PurchaserUpdateForm(forms.ModelForm):
     captcha = CaptchaField()
 
     class Meta:
         model = Purchaser
         fields = [
+            "username",
+            "first_name",
+            "last_name",
             "is_staff",
             "is_superuser"
         ]

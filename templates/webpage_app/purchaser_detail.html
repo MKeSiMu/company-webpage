@@ -3,7 +3,11 @@
 {% block content %}
   <div class="container container-header">
     <h1>
-      {{ purchaser.get_full_name }}
+      {% if purchaser.first_name and purchaser.last_name %}
+        {{ purchaser.get_full_name }}
+      {% else %}
+        {{ purchaser.username }}
+      {% endif %}
       <a href="{% url 'webpage_app:purchaser-delete' pk=purchaser.id %}" class="btn btn-danger w-auto me-1 mb-0" >
         Delete
       </a>
@@ -13,6 +17,7 @@
       </a>
     </h1>
     <p><strong>Is staff:</strong> {{ purchaser.is_staff }}</p>
+    <p><strong>Is superuser:</strong> {{ purchaser.is_superuser }}</p>
     <hr>
     <h3>Managed manufacturers</h3>
     {% if purchaser.manufacturers.all %}

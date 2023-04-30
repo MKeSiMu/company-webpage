@@ -45,21 +45,29 @@
 
   {% endblock header %}
 
-  {% block content %}{% endblock content %}
+  {% if request.user.is_authenticated %}
+
+    {% block content %}{% endblock %}
+
+    {% block javascripts_for_authenticated_users %}{% endblock %}
+
+  {% else %}
+
+    {% block content_for_anonymous_user %}{% endblock %}
+
+    {% block javascripts %}{% endblock javascripts %}
+
+    {% block footer %}
+      {% include 'includes/footer.html' %}
+    {% endblock footer %}
+
+  {% endif %}
 
   {% block pagination %}
     {% include "includes/pagination.html" %}
   {% endblock %}
 
-  {% block footer %}
-
-    {% include 'includes/footer.html' %}
-
-  {% endblock footer %}
-
   {% include 'includes/scripts.html' %}
-
-  {% block javascripts %}{% endblock javascripts %}
 
 </body>
 

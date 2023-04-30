@@ -3,7 +3,7 @@
 
 {% block title %} Material Kit 2 by Creative Tim {% endblock title %}
 
-{% block content %}
+{% block content_for_anonymous_user %}
 
   <header class="header-2">
     <div class="page-header min-vh-100 relative" style="background-image: url('{% static 'img/curved.jpg' %}')">
@@ -53,7 +53,10 @@
           <div class="col-lg-6 mx-auto">
             <h2 class="text-primary text-gradient mb-0">WHY</h2>
             <h2 class="">we do what we do?</h2>
-            <p class="lead">To ensure that our customers do not overpay for standard bearings and can confidently sell products under their own brand all over the world.</p>
+            <p class="lead">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus alias dolores eos
+              est libero officia officiis ratione ullam veniam
+            </p>
           </div>
         </div>
       </div>
@@ -79,7 +82,10 @@
                   <i class="fa fa-usd" aria-hidden="true" style="color: white; font-size: 40px"></i>
                 </div>
                 <h2 class="text-white up mb-0">Price</h2>
-                <p class="text-white">Check the possible ways of working with our product and the necessary files for building your own project.</p>
+                <p class="text-white">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dignissimos eligendi
+                  facere iste minus obcaecati, pariatur, quia reiciendis reprehenderit rerum, sed?
+                </p>
               </div>
             </div>
         </div>
@@ -91,7 +97,10 @@
                   <i class="fa fa-cubes" aria-hidden="true" style="color: white; font-size: 40px"></i>
                 </div>
                 <h2 class="text-white up mb-0">Consistency</h2>
-                <p class="text-white">Check the possible ways of working with our product and the necessary files for building your own project.</p>
+                <p class="text-white">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cum distinctio, ex
+                  excepturi hic quasi recusandae saepe tempora vel velit quia reiciendis.
+                </p>
               </div>
             </div>
         </div>
@@ -103,7 +112,10 @@
                   <i class="fa fa-thumbs-up icon-center" aria-hidden="true" style="color: white; font-size: 40px;"></i>
                 </div>
                 <h2 class="text-white up mb-0">Quality</h2>
-                <p class="text-white">Check the possible ways of working with our product and the necessary files for building your own project.</p>
+                <p class="text-white">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consectetur deserunt
+                  dolor doloribus fugiat iste, molestias porro possimus. Aliquid, est.
+                </p>
               </div>
             </div>
         </div>
@@ -126,7 +138,9 @@
               <div class="p-3 text-center">
                 <h1 class="text-gradient text-primary"><span id="state1" countTo="9000">0</span>+</h1>
                 <h5 class="mt-3">Bearing Models</h5>
-                <p class="text-sm">Covers wide range of industrial, automotive and agricultural bearings</p>
+                <p class="text-sm">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, dolor
+                </p>
               </div>
               <hr class="vertical dark">
             </div>
@@ -134,6 +148,9 @@
               <div class="p-3 text-center">
                 <h1 class="text-gradient text-primary"> <span id="state2" countTo="3000">0</span>+</h1>
                 <h5 class="mt-3">Models In Stock</h5>
+                <p class="text-sm">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, quod
+                </p>
               </div>
               <hr class="vertical dark">
             </div>
@@ -141,7 +158,9 @@
               <div class="p-3 text-center">
                 <h1 class="text-gradient text-primary"> <span id="state3" countTo="3500">0</span>sqm</h1>
                 <h5 class="mt-3">Warehouse With Lab</h5>
-                <p class="text-sm">Re-checking the quality after receiving and storing the goods in proper conditions</p>
+                <p class="text-sm">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, dolorum
+                </p>
               </div>
             </div>
           </div>
@@ -162,7 +181,7 @@
               <div class="text-center">
                 <h3 class="text-gradient text-primary">Contact us</h3>
                 <p class="mb-0">
-                  For further questions, including partnership opportunities, please email hello@creative-tim.com
+                  For further questions, including partnership opportunities, please email hello@best-bearing.com
                   or contact using our contact form.
                 </p>
               </div>
@@ -178,13 +197,14 @@
                     <div class="col-md-6 ps-md-2">
                       <label>Email</label>
                       <div class="input-group">
-                        <input type="email" class="form-control" placeholder="hello@creative-tim.com">
+                        <input type="email" class="form-control" placeholder="hello@best-bearing.com">
                       </div>
                     </div>
                   </div>
                   <div class="form-group mb-0 mt-md-0 mt-4">
                     <label>How can we help you?</label>
-                    <textarea name="message" class="form-control" id="message" rows="6" placeholder="Describe your problem in at least 250 characters"></textarea>
+                    <textarea name="message" class="form-control" id="message" rows="6"
+                              placeholder="Describe your question in at least 250 characters"></textarea>
                   </div>
                   <div class="row">
                     <div class="col-md-12 text-center">
@@ -200,7 +220,90 @@
     </div>
   </section>
 
-{% endblock content %}
+{% endblock %}
+
+{% block content %}
+
+  <header class="header-2">
+    <div class="page-header min-vh-75 relative" style="background-image: url('{% static 'img/curved.jpg' %}')">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            {% if num_visit == 1 %}
+              <h2 class="text-white pt-3 mt-n5">
+                Howdy, {{ request.user.get_full_name|default:"friend" }}
+              </h2>
+            {% else %}
+              <h2 class="text-white pt-3 mt-n5">
+                Welcome back, {{ request.user.get_full_name|default:"friend" }}
+              </h2>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="position-absolute w-100 z-index-1 bottom-0">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="moving-waves">
+            <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+            <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+            <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+            <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+
+  <section class="pt-3 pb-4" id="count-stats">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-11 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
+          <div class="row">
+            <div class="col-md-3 position-relative">
+              <div class="p-3 text-center">
+                <h1 class="text-gradient text-primary" id="state1" countTo={{ num_purchasers }}>0</h1>
+                <h5 class="mt-3">Purchasers</h5>
+                <a href="{% url 'webpage_app:purchaser-list' %}" class="btn bg-gradient-success mt-3 mb-0">View</a>
+              </div>
+              <hr class="vertical dark">
+            </div>
+            <div class="col-md-3 position-relative">
+              <div class="p-3 text-center">
+                <h1 class="text-gradient text-primary" id="state2" countTo={{ num_manufacturers }}>0</h1>
+                <h5 class="mt-3">Manufacturers</h5>
+                <a href="{% url 'webpage_app:manufacturer-list' %}" class="btn bg-gradient-success mt-3 mb-0">View</a>
+              </div>
+              <hr class="vertical dark">
+            </div>
+            <div class="col-md-3 position-relative">
+              <div class="p-3 text-center">
+                <h1 class="text-gradient text-primary" id="state3" countTo={{ num_bearing_type }}>0</h1>
+                <h5 class="mt-3">Bearing Types</h5>
+                <a href="{% url 'webpage_app:bearing-type-list' %}" class="btn bg-gradient-success mt-3 mb-0">View</a>
+              </div>
+              <hr class="vertical dark">
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 text-center">
+                <h1 class="text-gradient text-primary" id="state4" countTo={{ num_bearing_category }}>0</h1>
+                <h5 class="mt-3">Bearing Categories</h5>
+                <a href="{% url 'webpage_app:bearing-category-list' %}" class="btn bg-gradient-success mt-3 mb-0">View</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
 
 {% block javascripts %}
 
@@ -245,3 +348,43 @@
   </script>
 
 {% endblock javascripts %}
+
+{% block javascripts_for_authenticated_users %}
+
+  <script type="text/javascript" src="/static/js/plugins/countup.min.js"></script>
+
+  <script type="text/javascript">
+    if (document.getElementById('state1')) {
+      const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+      if (!countUp.error) {
+        countUp.start();
+      } else {
+        console.error(countUp.error);
+      }
+    }
+    if (document.getElementById('state2')) {
+      const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+      if (!countUp1.error) {
+        countUp1.start();
+      } else {
+        console.error(countUp1.error);
+      }
+    }
+    if (document.getElementById('state3')) {
+      const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+      if (!countUp2.error) {
+        countUp2.start();
+      } else {
+        console.error(countUp2.error);
+      }
+    }
+    if (document.getElementById('state4')) {
+      const countUp3 = new CountUp('state4', document.getElementById("state4").getAttribute("countTo"));
+      if (!countUp3.error) {
+        countUp3.start();
+      } else {
+        console.error(countUp3.error);
+      }
+    }
+  </script>
+{% endblock javascripts_for_authenticated_users %}
