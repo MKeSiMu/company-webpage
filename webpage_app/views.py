@@ -49,12 +49,13 @@ class ManufacturerListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ManufacturerListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         name = self.request.GET.get("name", "")
 
-        context["search_name_form"] = \
+        context["search_name_form"] = (
             ManufacturerNameSearchForm(initial={"name": name})
+        )
 
         return context
 
@@ -85,8 +86,9 @@ class ManufacturerPublicCreateView(SuccessMessageMixin, generic.CreateView):
     model = Manufacturer
     form_class = ManufacturerPublicForm
     success_url = "/manufacturer-form/"
-    success_message = \
+    success_message = (
         "Form submission successful. Thank you! We will contact you ASAP."
+    )
     template_name = "webpage_app/manufacturer_public_form.html"
 
 
@@ -108,12 +110,13 @@ class BearingTypeListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(BearingTypeListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         name = self.request.GET.get("name", "")
 
-        context["search_name_form"] = \
+        context["search_name_form"] = (
             ManufacturerNameSearchForm(initial={"name": name})
+        )
 
         return context
 
