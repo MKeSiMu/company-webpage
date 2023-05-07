@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container container-header">
+    <h1>
+      {% if purchaser.first_name and purchaser.last_name %}
+        {{ purchaser.get_full_name }}
+      {% else %}
+        {{ purchaser.username }}
+      {% endif %}
+      <a href="{% url 'webpage_app:purchaser-delete' pk=purchaser.id %}" class="btn btn-danger w-auto me-1 mb-0" >
+        Delete
+      </a>
+
+      <a href="{% url 'webpage_app:purchaser-update' pk=purchaser.id %}" class="btn btn-info w-auto me-1 mb-0">
+        Update
+      </a>
+    </h1>
+    <p><strong>Is staff:</strong> {{ purchaser.is_staff }}</p>
+    <p><strong>Is superuser:</strong> {{ purchaser.is_superuser }}</p>
+    <hr>
+    <h3>Managed manufacturers</h3>
+    {% if purchaser.manufacturers.all %}
+      <ul>
+        {% for manufacturer in page_obj %}
+
+          <li>
+            <a href="{% url 'webpage_app:manufacturer-detail' pk=manufacturer.id %}">
+              {{ manufacturer.name }} (Status: {{ manufacturer.get_status_display }},
+              Price level: {{ manufacturer.get_price_level_display }})
+            </a>
+          </li>
+
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>There are no manufacturers in the database.</p>
+    {% endif %}
+  </div>
+{% endblock %}

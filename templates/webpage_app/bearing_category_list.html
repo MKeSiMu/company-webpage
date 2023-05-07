@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container container-header">
+    <h1>
+      Bearing Category List
+      <a href="{% url 'webpage_app:bearing-category-create' %}" class="btn btn-success w-auto me-1 mb-0">
+        Create
+      </a>
+    </h1>
+    {% if bearing_category_list %}
+      <ul>
+        {% for bearing_category in bearing_category_list %}
+          <li>
+            <a
+                href="{% url 'webpage_app:bearing-category-detail' pk=bearing_category.id %} "
+            >
+              {{ bearing_category.name }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>There are no bearing categories in data base</p>
+    {% endif %}
+  </div>
+{% endblock %}

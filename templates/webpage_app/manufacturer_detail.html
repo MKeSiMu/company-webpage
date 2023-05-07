@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container container-header">
+    <h1>
+      {{ manufacturer.name }}
+      <a href="{% url 'webpage_app:manufacturer-delete' pk=manufacturer.id %}" class="btn btn-danger w-auto me-1 mb-0" >
+        Delete
+      </a>
+
+      <a href="{% url 'webpage_app:manufacturer-update' pk=manufacturer.id %}" class="btn btn-info w-auto me-1 mb-0">
+        Update
+      </a>
+    </h1>
+    <hr>
+    <h3>Basic info</h3>
+    <p>
+      <strong>Contact person:</strong> {{ manufacturer.contact_person }};
+      <br>
+      <strong>Contact phone:</strong> {{ manufacturer.contact_phone }};
+      <br>
+      <strong>Website:</strong> {{ manufacturer.website }};
+      <br>
+      <strong>Address:</strong> {{ manufacturer.address }};
+      <br>
+      <strong>Business model:</strong> {{ manufacturer.get_business_model_display }};
+      <br>
+      <strong>Responsible purchaser:</strong> {{ manufacturer.responsible_purchaser }};
+    </p>
+    <hr>
+    <h3>Produce bearing type</h3>
+    <ul>
+      {% for bearing_type in manufacturer.produce_bearing_type.all %}
+        <li>{{ bearing_type.name }} ({{ bearing_type.bearing_category }})</li>
+      {% endfor %}
+    </ul>
+    <hr>
+    <h3>Purchaser remarks</h3>
+    <p>
+      <strong>Price level:</strong> {{ manufacturer.get_price_level_display }};
+      <br>
+      <strong>Status:</strong> {{ manufacturer.get_status_display }};
+      <br>
+      <strong>Rating:</strong> {{ manufacturer.get_rating_display }};
+      <br>
+      <strong>Remarks:</strong> {{ manufacturer.remark }};
+    </p>
+  </div>
+{% endblock %}

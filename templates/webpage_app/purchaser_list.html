@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container container-header">
+    <h1>
+      Purchaser List
+      <a href="{% url 'webpage_app:purchaser-create' %}" class="btn btn-success w-auto me-1 mb-0">
+        Create
+      </a>
+    </h1>
+
+    {% if purchaser_list %}
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Full name</th>
+          <th>Managed manufacturers</th>
+        </tr>
+
+        {% for purchaser in purchaser_list %}
+          <tr>
+            <td>
+              {{ purchaser.id }}
+            </td>
+            {% if request.user.id == purchaser.id %}
+              <td>
+                <a href="{% url 'webpage_app:purchaser-detail' pk=purchaser.id %}" style="color: red">
+                  {{ purchaser.username }} (me)
+                </a>
+              </td>
+            {% else %}
+              <td>
+                <a href="{% url 'webpage_app:purchaser-detail' pk=purchaser.id %}">
+                  {{ purchaser.username }}
+                </a>
+              </td>
+            {% endif %}
+            <td>
+              {{ purchaser.get_full_name }}
+            </td>
+            <td>
+              {{ purchaser.manufacturers.count }}
+            </td>
+          </tr>
+
+        {% endfor %}
+      </table>
+
+    {% else %}
+      <p>There are no purchasers in the database.</p>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="container container-header">
+    <h1>
+      Bearing Type List
+      <a href="{% url 'webpage_app:bearing-type-create' %}" class="btn btn-success w-auto me-1 mb-0">
+        Create
+      </a>
+    </h1>
+
+    {% if bearing_type_list %}
+      <form action="" method="get" class="d-flex flex-row align-items-center flex-wrap" style="margin-bottom: 5px;">
+        {{ search_name_form|crispy }}
+          <input type="submit" class="btn btn-secondary" value="Search" style="margin-left: 5px">
+      </form>
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Bearing category</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+
+        {% for bearing_type in bearing_type_list %}
+          <tr>
+            <td>
+                {{ bearing_type.id }}
+            </td>
+            <td>
+              <a href="{% url 'webpage_app:bearing-type-detail' pk=bearing_type.id %}">
+                {{ bearing_type.name }}
+              </a>
+            </td>
+            <td>
+                {{ bearing_type.bearing_category }}
+            </td>
+            <td>
+              <a
+                  class="btn btn-info w-auto me-1 mb-0"
+                  href="{% url 'webpage_app:bearing-type-update' pk=bearing_type.id %}"
+              >
+                Update
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-danger w-auto me-1 mb-0"
+                 href="{% url 'webpage_app:bearing-type-delete' pk=bearing_type.id %}">
+                Delete
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+
+    {% else %}
+      <form action="" method="get" class="d-flex flex-row align-items-center flex-wrap" style="margin-bottom: 5px;">
+        {{ search_name_form|crispy }}
+          <input type="submit" class="btn btn-info" value="Search" style="margin-left: 5px">
+      </form>
+      <p>There are no bearing types in the database.</p>
+    {% endif %}
+  </div>
+{% endblock %}
