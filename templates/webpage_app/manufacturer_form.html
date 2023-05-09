@@ -12,8 +12,8 @@
       <input type="submit" value="Submit" class="btn bg-gradient-success">
     </form>
   {% else %}
-    <h1>Can't update information!</h1>
-    <p>Sorry, you cannot update the information if you are not responsible for manufacturer.</p>
+    <h1>Can't {{ object|yesno:"update,create" }} information!</h1>
+    <p>Sorry, you cannot {{ object|yesno:"update the information if you are not responsible for ,create" }} manufacturer.</p>
   {% endif %}
   </div>
 {% endblock %}

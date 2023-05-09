@@ -5,6 +5,12 @@
 
 [Company webpage project deployed in Render](https://company-webpage.onrender.com/)
 
+#### User for tests:
+
+login: test.user
+
+password: Test_1234
+
 ## Installation
 
 Python3 must be already installed.
